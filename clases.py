@@ -37,21 +37,26 @@ class Pokedex:
         
     def Borrar_Pokemon_Indice(self, indice):
         remove("db/" + str(indice))
-        for i in range(indice, self.numero+1):
+        for i in range(int(indice), self.numero):
             rename("db/" + str(i+1), "db/" + str(i))
         self.numero -= 1
+        with open("amount", "w") as num:
+            num.write(str(self.numero))
         print("Pokemon Borrado de la Pokedex")
     
     def Borrar_Pokemon_Nombre(self, nombre):
         confirm = 0
-        for i in range(0, self.numero+1):
-            with open("db/" + i) as num:
+        for i in range(1, self.numero+1):
+            with open("db/" + str(i)) as num:
                 content = num.read()
-                if conten.find(str(nombre).title()):
-                    remove("db/" + i)  
-                    for i in range(indice, self.numero+1):
-                        rename("db/" + str(i+1), "db/" + str(i))
+                if content.find(str(nombre).title()):
+                    remove("db/" + str(i))
+                    if self.numero != 1:
+                        for i in range(1, self.numero):
+                            rename("db/" + str(i+1), "db/" + str(i))
                     self.numero -= 1
+                    with open("amount", "w") as num:
+                        num.write(str(self.numero))
                     confirm = 1
                     break
         if confirm == 1:
