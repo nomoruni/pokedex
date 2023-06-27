@@ -28,7 +28,7 @@ def main():
             
             if tipo not in lista or tipo == 0 or tipo2 not in lista:  
                 print("Debe entrar un número valido!! \n")
-                num==0
+                num = 0
                 continue    
             
             genero = input("Elija un Genero: \n 1-Masculino\n 2-Femenino\n")
@@ -39,7 +39,7 @@ def main():
                 genero == "F"
             else: 
                 print("Debe escribir un número entre 1 y 2")
-                num == 0
+                num = 0
                 continue
             
             descripcion = input("Por ultimo, escriba una breve descripción del Pokemon: \n")
@@ -47,8 +47,19 @@ def main():
             pokemon = Pokemon(nombre, int(tipo), int(tipo2), genero, descripcion)
             pokedex.Insertar_Pokemon(pokemon)
             pokedex.Escribir_Archivo_Pokemons()
-         if num == 3:
-             choise = input("Desea borrar  un pokemon por")
+        if num == 3:
+            choise = input("Que metodo desea usar: \n 1-Borrar por número de Pokedex \n 2-Borrar por nombre")
+            if choise == 1:
+                indice = input("Entre el número de Pokemon: \n")
+                pokedex.Borrar_Pokemon_Indice(indice)
+            if choise == 2:
+                nombrep = input("Entre el nombre del Pokemon: \n")
+                pokedex.Borrar_Pokemon_Nombre(nombrep)
+            else: 
+                print("Escoja una opcion válida!!")
+                num = 0
+                continue
+                
     
 if __name__ == "__main__":
     main()
