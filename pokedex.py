@@ -1,21 +1,5 @@
-import json
+from pokemon import Pokemon, t_tipo
 from os import remove, rename
-
-t_tipo=["planta", "fuego", "agua", "rayo", "lucha", "insecto", "siniestro", "psiquico", "tierra", "roca", "acero", "dragon", "hada", "hielo", "normal", "volador", "veneno"]
-#t_nat=["activa", "afable", "agitada", "alegre", "alocada", "amable", "audaz", "cauta", "dócil", "firme", "floja", "fuerte", "grosera", "huraña", "ingenua", "mansa", "miedosa", "modesta", "osada", "pícara", "rara", "serena", "seria", "tímida"]
-
-class Pokemon():
-    def __init__(self, nombre, tipo, tipo2, descripcion):
-        self.nombre = nombre.title()
-        self.tipo = str(t_tipo[tipo - 1])
-        if int(tipo2) != 0:
-            self.tipo2 = str(t_tipo[tipo2 - 1])
-        else:
-            self.tipo2 = "-"
-        self.descripcion = descripcion
-        
-    def __str__(self):
-        return " Nombre: " + self.nombre + " Tipo #1: " + self.tipo + " Tipo #2: " + self.tipo2 + " Descripción: " + self.descripcion + "\n"
 
 class Pokedex:
     
@@ -23,16 +7,15 @@ class Pokedex:
         try:
             with open("amount") as num:
                 self.numero = int(num.read())
-            self.pokemons = []
         except FileNotFoundError:
             with open("amount", "w") as num:
                 num.write("0")
             self.numero = 0
-            self.pokemons = []
         
         
-    def Insertar_Pokemon(self, pokemon):
-        self.pokemons.append(pokemon)
+    def Insertar_Pokemon(self, imagen, nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion):
+        pokemon = Pokemon(imagen, nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion)
+        self.Escribir_Archivo_Pokemons(pokemon)
         print("Pokemon Agregado a la Pokedex")
         
     def Borrar_Pokemon_Indice(self, indice):
@@ -65,17 +48,29 @@ class Pokedex:
             print("El Pokemon no existe.")
         
     
-    def Escribir_Archivo_Pokemons(self):
+    def Escribir_Archivo_Pokemons(self, pokemon):
         
-        for poke in self.pokemons:
-            with open("db/" + str(self.numero+1), "w") as file_object:
-                file_object.write(poke.__str__())
-                self.numero += 1
+        with open("db/" + str(self.numero+1), "w") as file_object:
+            file_object.write(pokemon.Escribir_Pokedex())
+            self.numero += 1
                 
         with open("amount", "w") as num:
             num.write(str(self.numero))
                 
         print("Base de datos guardada")
+    
+    def Buscar_Pokemon_Pokedex(self, nombre):
+        confirm = 0
+        for i in range(1, self.numero+1):
+            with open("db/" + str(i)) as num:
+                content = num.read()
+                if content.find(nombre):
+                    confirm = 1
+                    break
+        if confirm == 1:
+            return confirm
+        else:
+            return 0
     
     def __str__(self):
         try:

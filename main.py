@@ -1,59 +1,206 @@
-from clases import Pokemon, Pokedex
+from pokedex import Pokedex
+from pokemon import Pokemon
+from equipo import Equipo
+from pokeball import Pokeball, Superball, Masterball, Ultraball
+import random
+import time
 
 def main():
     pokedex = Pokedex()
-    num=0
-    while(num==0):
-        print("Bienvenido a la Pokedex en consola! \n Que desea hacer?\n\n")
-        print("1-Visualizar Pokemons creados\n")
-        print("2-Insertar un Pokemon nuevo\n")
-        print("3-Borrar un Pokemon de la lista\n\n")
+    equipo = Equipo()
+   
+    with open("images/pokemon") as poke:
+        content = poke.read()
+        print(content)
+    
+    num = 0
+    while(num == 0):
+        print("\nTe encuentras sano y salvo en tu casa...\n")
+        time.sleep(1)
+        print("\n ¿Que desea hacer? Elija una opción:")
+        print("\n 1-¡Atrapar un Pokémon!")
+        print("\n 2-Abrir la Pokedex")
+        print("\n 3-Borrar un Pokémon de la Pokedex")
+        print("\n 4-Visualizar Equipo")
+        num = input("\n")
         
-        num = int(input("Ingrese un número de 1-3:"))
+        if int(num) == 1:
+            print("Antes de adentrarte en las altas yerbas, has agarrado un puñado de pokeballs de la mesa...\n")
+            ty = random.randint(1, 4)
+            
+            print(".")
+            time.sleep(1)
+            print(".")
+            time.sleep(1)
+            print(".\n")
+            
+            if ty == 4:
+                cant = 1
+                print("Haz adquirido: 1 x Masterball")
+                pokeballs = Masterball()
+            else:
+                cant = random.randint(1, 5)
+                if ty == 1:
+                    print("Haz adquirido: " + str(cant) + " x Pokeballs")
+                    pokeballs = Pokeball(cant)
+                elif ty == 2:
+                    print("Haz adquirido: " + str(cant) + " x Superballs")
+                    pokeballs = Superball(cant)
+                elif ty == 3:
+                    print("Haz adquirido: " + str(cant) + " x Ultraballs")
+                    pokeballs = Ultraball(cant)
+            print("\n")
+            
+            num2 = 0
+            while (num2 == 0 ):
+                print("Te has adentrado en las yerbas altas...")
+
+                clock = random.randint(1, 10)
+                for i in range(0, clock):
+                    print(".")
+                    time.sleep(1)
+                print("\n¡¡¡ HA APARECIDO UN POKÉMON !!!\n\n")
+
+                img = random.randint(1, 17)
+                ps = random.randint(1, 3)
+                nivel = random.randint(1, 10)
+                
+                num3 = 0
+                while(num3 == 0):
+                    with open("images/" + str(img)) as im:
+                        imagen = im.read()
+                        print(imagen)
+
+                    if ps == 1:
+                        print("\nTiene los PS(Puntos de Salud) bajos\n")
+                    elif ps == 2:
+                        print("\nTiene los PS(Puntos de Salud) a la mitad\n")
+                    elif ps == 3:
+                        print("\nTiene los PS(Puntos de Salud) altos\n")
+                    
+                    print("y su nivel es NV: " + str(nivel))
+                    time.sleep(1)
+                
+                
+                    print("\n\n ¡¿ Qué vas a hacer?! \n 1-Lanzar una pokeball \n 2-¡Huir!")
+                    option = input("\n")
+
+                    if int(option) == 1:
+                        ind = pokeballs.Lanzar_Pokeball()
+
+                        if ind == 0:
+                            print("El Pokémon ha escapado...\n")
+                            print("Te marchas a casa...\n")
+                            num2 = 1
+                            num = 0
+                            num3 = 1
+                            break
+                        else:
+                            plus = random.randint(0, 2)
+                            if ps + plus > ind:
+                                for i in range(0, 2):
+                                    print(".")
+                                    time.sleep(1)
+                                print("\n¡El Pokémon se ha liberado de la pokeball!\n")
+                                num3 = 0
+                                continue
+                            
+                            elif ps + plus > ind and plus == 2:
+                                for i in range(0, 2):
+                                    print(".")
+                                    time.sleep(1)
+                                print("\n¡El Pokémon se ha liberado de la pokeball!\n")
+                                print("El Pokémon ha escapado...\n")
+                                num3 = 1
+                                continue
+                            elif ps + plus <= ind:
+                                for i in range(0, 2):
+                                    print(".")
+                                    time.sleep(1)
+                                print("¡¡Has atrapado al Pokémon!!\n")
+                                
+                                with open("images/" + str(img)) as im:
+                                    imagen = im.read()
+                                    print(imagen)
+
+                                nombre = input("\n ¿Qué nombre desea ponerle al Pokémon\n")
+                                tipo = int(input("Elija el Tipo #1 del Pokémon: \n 1-planta\n 2-fuego\n 3-agua\n 4-rayo\n 5-lucha\n 6-insecto\n 7-siniestro\n 8-psiquico\n 9-tierra\n 10-roca\n 11-acero\n 12-dragon\n 13-hada\n 14-hielo\n 15-normal\n 16-volador\n 17-veneno\n"))
+                                tipo2 = int(input("Elija el Tipo #2 del Pokémon: \n 0-No tiene\n 1-planta\n 2-fuego\n 3-agua\n 4-rayo\n 5-lucha\n 6-insecto\n 7-siniestro\n 8-psiquico\n 9-tierra\n 10-roca\n 11-acero\n 12-dragon\n 13-hada\n 14-hielo\n 15-normal\n 16-volador\n 17-veneno\n"))
+                                naturaleza = random.randint(1, 24)
+                                descripcion = input("\n Escriba una descripción, sobre el Pokémon capturado, para la Pokedex: \n")
+                                
+                                if pokedex.Buscar_Pokemon_Imagen_Pokedex(nombre) == 1:
+                                    print("El Pokémon capturado ya se encuentra en la Pokedex")
+                                else:
+                                    pokedex.Insertar_Pokemon("images/"+str(img), nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion)
+                                
+                                pokemon = Pokemon("images/"+str(img), nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion)
+                                equipo.Insertar_Pokemon(pokemon)
+                                
+                                print("¿Quieres volver a casa? S=Sí , N=No\n")
+                                opt = input()
+                                if opt.capitalize() == "S":
+                                    num3 = 1
+                                    num2 = 1
+                                    num = 0
+                                    break
+                                else:
+                                    num3 = 1
+                                    continue
+                                
+                    elif int(option) == 2:     
+                        print("\nHas escapado con exito!\n")
+                        time.sleep(1)
+                        print("¿Quieres volver a casa? S=Sí , N=No\n")
+                        opt = input()
+                        if opt.capitalize() == "S":
+                            num3 = 1
+                            num2 = 1
+                            num = 0
+                            break
+                        else:
+                            num3 = 1
+                            continue
+                    
+                    else:
+                        print("Debe entrar un número valido!!")
+                        num3 = 0
+                        continue
         
-        if num == 1:
-            if pokedex.__str__() == 0:
-                num = 0
-                print("No existe ningun pokemon en la pokedex aún. Cree uno!\n \n")
+        elif int(num) == 2:
+            print("\nHas Abierto la Pokedex...\n")
+            for i in range(0, 2):
+                print(".")
+                time.sleep(1)
+            pokedex.__str__()
             num = 0
-            
-        if num == 2:
-            nombre = input("Inserte el nombre del pokemon: \n")
-            
-            tipo = input("Elija el tipo: \n 1-planta 2-fuego 3-agua 4-rayo\n 5-lucha 6-insecto 7-siniestro 8-psiquico\n 9-tierra 10-roca 11-acero 12-dragon\n 13-hada 14-hielo 15-normal 16-volador\n 17-veneno\n")
-            lista = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "12", "13", "14", "15", "16", "17"]
-            
-            tipo2 = input("Entre el tipo secundario, si tiene solo uno entre 0: \n 1-planta 2-fuego 3-agua 4-rayo\n 5-lucha 6-insecto 7-siniestro 8-psiquico\n 9-tierra 10-roca 11-acero 12-dragon\n 13-hada 14-hielo 15-normal 16-volador\n 17-veneno\n")
-            
-            if tipo not in lista or tipo == 0 or tipo2 not in lista:  
-                print("Debe entrar un número valido!! \n")
-                num = 0
-                continue    
-            elif tipo2 == tipo:
-                tipo2 = 0
-            
-            descripcion = input("Por ultimo, escriba una breve descripción del Pokemon: \n")
-            
-            pokemon = Pokemon(nombre, int(tipo), int(tipo2), descripcion)
-            pokedex.Insertar_Pokemon(pokemon)
-            pokedex.Escribir_Archivo_Pokemons()
-            pokedex.pokemons.clear()
-            num = 0
-        if num == 3:
-            choise = input("Que metodo desea usar: \n 1-Borrar por número de Pokedex \n 2-Borrar por nombre \n")
-            if int(choise) == 1:
-                indice = input("Entre el número de Pokemon: \n")
-                pokedex.Borrar_Pokemon_Indice(indice)
-                num = 0
-            if int(choise) == 2:
-                nombrep = input("Entre el nombre del Pokemon: \n")
-                pokedex.Borrar_Pokemon_Nombre(nombrep)
-                num = 0
-            else: 
-                print("Escoja una opcion válida!! \n")
+            continue
+        
+        elif int(num) == 3:
+            print("\n ¿Cómo desea borrar el Pokémon? \n 1-Por su número de Pokedex\n 2-Por su nombre\n")
+            opt = input()
+            if int(opt) == 1:
+                print("\nEscriba el número de Pokedex del Pokémon a borrar:\n")
+                num = input()
+                pokedex.Borrar_Pokemon_Indice(int(num))
                 num = 0
                 continue
-                
-    
+            elif int(opt) == 2:
+                print("\nEscriba el nombre del Pokémon a borrar:\n")
+                nom = input()
+                pokedex.Borrar_Pokemon_Nombre(nom)
+                num = 0
+                continue
+        elif int(num) == 4:
+            equipo.Mostrar_Equipo()
+            num = 0
+            continue
+                                   
+                    
+            
+            
+            
+            
+            
 if __name__ == "__main__":
     main()
