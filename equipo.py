@@ -11,7 +11,7 @@ class Equipo:
     
     def Mostrar_Equipo(self):
         print("Este es tu Equipo: \n\n")
-        for poke in self.pokemons:
-            poke.__str__()
+        for pokemon in self.pokemons:
+            print(pokemon.__str__())
             print("\n")
         

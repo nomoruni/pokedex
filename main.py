@@ -87,7 +87,7 @@ def main():
 
                     if int(option) == 1:
                         ind = pokeballs.Lanzar_Pokeball()
-
+                        
                         if ind == 0:
                             print("El Pokémon ha escapado...\n")
                             print("Te marchas a casa...\n")
@@ -97,18 +97,34 @@ def main():
                             break
                         else:
                             plus = random.randint(0, 2)
-                            if ps + plus > ind:
+                            if img == 7:
                                 for i in range(0, 2):
                                     print(".")
                                     time.sleep(1)
+                                with open("images/untrap") as im:
+                                    untrap = im.read()
+                                    print(untrap)
+                                print("\n¡El Pokémon se ha liberado de la pokeball!\n")
+                                print("El Pokémon ha escapado...\n")
+                                num3 = 1
+                                continue
+                            elif ps + plus > ind:
+                                for i in range(0, 2):
+                                    print(".")
+                                    time.sleep(1)
+                                with open("images/untrap") as im:
+                                    untrap = im.read()
+                                    print(untrap)
                                 print("\n¡El Pokémon se ha liberado de la pokeball!\n")
                                 num3 = 0
                                 continue
-                            
                             elif ps + plus > ind and plus == 2:
                                 for i in range(0, 2):
                                     print(".")
                                     time.sleep(1)
+                                with open("images/untrap") as im:
+                                    untrap = im.read()
+                                    print(untrap)
                                 print("\n¡El Pokémon se ha liberado de la pokeball!\n")
                                 print("El Pokémon ha escapado...\n")
                                 num3 = 1
@@ -119,22 +135,23 @@ def main():
                                     time.sleep(1)
                                 print("¡¡Has atrapado al Pokémon!!\n")
                                 
-                                with open("images/" + str(img)) as im:
-                                    imagen = im.read()
-                                    print(imagen)
+                                with open("images/trap") as im:
+                                    trap = im.read()
+                                    print(trap)
 
-                                nombre = input("\n ¿Qué nombre desea ponerle al Pokémon\n")
-                                tipo = int(input("Elija el Tipo #1 del Pokémon: \n 1-planta\n 2-fuego\n 3-agua\n 4-rayo\n 5-lucha\n 6-insecto\n 7-siniestro\n 8-psiquico\n 9-tierra\n 10-roca\n 11-acero\n 12-dragon\n 13-hada\n 14-hielo\n 15-normal\n 16-volador\n 17-veneno\n"))
-                                tipo2 = int(input("Elija el Tipo #2 del Pokémon: \n 0-No tiene\n 1-planta\n 2-fuego\n 3-agua\n 4-rayo\n 5-lucha\n 6-insecto\n 7-siniestro\n 8-psiquico\n 9-tierra\n 10-roca\n 11-acero\n 12-dragon\n 13-hada\n 14-hielo\n 15-normal\n 16-volador\n 17-veneno\n"))
+                                nombre = input("\n ¿Qué mote desea ponerle al Pokémon\n")
+                                tipo = int(input("Elija el Tipo #1 del Pokémon: \n 1-planta\n 2-fuego\n 3-agua\n 4-rayo\n 5-lucha\n 6-insecto\n 7-siniestro\n 8-psiquico\n 9-tierra\n 10-roca\n 11-acero\n 12-dragon\n 13-hada\n 14-hielo\n 15-normal\n 16-volador\n 17-veneno\n 18-fantasma\n"))
+                                tipo2 = int(input("Elija el Tipo #2 del Pokémon: \n 0-No tiene\n 1-planta\n 2-fuego\n 3-agua\n 4-rayo\n 5-lucha\n 6-insecto\n 7-siniestro\n 8-psiquico\n 9-tierra\n 10-roca\n 11-acero\n 12-dragon\n 13-hada\n 14-hielo\n 15-normal\n 16-volador\n 17-veneno\n 18-fantasma\n"))
                                 naturaleza = random.randint(1, 24)
                                 descripcion = input("\n Escriba una descripción, sobre el Pokémon capturado, para la Pokedex: \n")
                                 
-                                if pokedex.Buscar_Pokemon_Imagen_Pokedex(nombre) == 1:
+                                pokemon = Pokemon("images/"+str(img), nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion)
+                                
+                                if pokedex.Buscar_Pokemon_Pokedex(imagen[0:15]) == 1:
                                     print("El Pokémon capturado ya se encuentra en la Pokedex")
                                 else:
-                                    pokedex.Insertar_Pokemon("images/"+str(img), nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion)
-                                
-                                pokemon = Pokemon("images/"+str(img), nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion)
+                                    pokedex.Insertar_Pokemon(pokemon)
+                        
                                 equipo.Insertar_Pokemon(pokemon)
                                 
                                 print("¿Quieres volver a casa? S=Sí , N=No\n")
@@ -146,7 +163,7 @@ def main():
                                     break
                                 else:
                                     num3 = 1
-                                    continue
+                                    continue                   
                                 
                     elif int(option) == 2:     
                         print("\nHas escapado con exito!\n")
@@ -192,7 +209,7 @@ def main():
                 num = 0
                 continue
         elif int(num) == 4:
-            equipo.Mostrar_Equipo()
+            equipo.Mostrar_Equipo() 
             num = 0
             continue
                                    

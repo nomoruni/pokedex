@@ -1,4 +1,4 @@
-t_tipo=("planta", "fuego", "agua", "rayo", "lucha", "insecto", "siniestro", "psiquico", "tierra", "roca", "acero", "dragon", "hada", "hielo", "normal", "volador", "veneno")
+t_tipo=("planta", "fuego", "agua", "rayo", "lucha", "insecto", "siniestro", "psiquico", "tierra", "roca", "acero", "dragon", "hada", "hielo", "normal", "volador", "veneno", "fantasma")
 t_nat=("activa", "afable", "agitada", "alegre", "alocada", "amable", "audaz", "cauta", "dócil", "firme", "floja", "fuerte", "grosera", "huraña", "ingenua", "mansa", "miedosa", "modesta", "osada", "pícara", "rara", "serena", "seria", "tímida")
 t_ps=("bajos", "medios", "altos")
 
@@ -19,11 +19,11 @@ class Pokemon():
     def __str__(self):
         with open(self.imagen) as img:
             content = img.read()
-            return content + "\n Nombre: " + self.nombre + " Tipo #1: " + self.tipo + " Tipo #2: " + self.tipo2 + " Naturaleza: " + self.naturaleza + " Descripción: " + self.descripcion + "\n"
+            return content + "\n Mote: " + self.nombre + "\n Tipo #1: " + self.tipo + "\n Tipo #2: " + self.tipo2 + "\n Naturaleza: " + self.naturaleza + "\n Descripción: " + self.descripcion + "\n"
     def Escribir_Pokedex(self):
          with open(self.imagen) as img:
             content = img.read()
-            return content + "\n Nombre: " + self.nombre + " Tipo #1: " + self.tipo + " Tipo #2: " + self.tipo2 + " Descripción: " + self.descripcion + "\n"
+            return "\n Nombre: " + content + "\n Tipo #1: " + self.tipo + "\n Tipo #2: " + self.tipo2 + "\n Descripción: " + self.descripcion + "\n"
     def Get_Nombre(self):
         return self.nombre
     def Get_Tipo1(self):

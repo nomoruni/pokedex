@@ -48,11 +48,11 @@ class Masterball(Pokeball):
     
     def Lanzar_Pokeball(self):
         if self.cantidad >= 1:
-            print("Has lanzado la Masterball")
+            print("Has lanzado la Masterball\n")
             self.cantidad -= 1
             return self.ind_cap
         else:
-            print("Ya has gastado la Masterball")
+            print("Ya has gastado la Masterball\n")
             return 0  
     
 

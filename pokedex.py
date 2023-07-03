@@ -13,8 +13,7 @@ class Pokedex:
             self.numero = 0
         
         
-    def Insertar_Pokemon(self, imagen, nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion):
-        pokemon = Pokemon(imagen, nombre, tipo, tipo2, nivel, ps, naturaleza, descripcion)
+    def Insertar_Pokemon(self, pokemon):
         self.Escribir_Archivo_Pokemons(pokemon)
         print("Pokemon Agregado a la Pokedex")
         
@@ -59,12 +58,12 @@ class Pokedex:
                 
         print("Base de datos guardada")
     
-    def Buscar_Pokemon_Pokedex(self, nombre):
+    def Buscar_Pokemon_Pokedex(self, imagen):
         confirm = 0
         for i in range(1, self.numero+1):
             with open("db/" + str(i)) as num:
                 content = num.read()
-                if content.find(nombre):
+                if content.find(imagen) != -1:
                     confirm = 1
                     break
         if confirm == 1:
