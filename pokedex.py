@@ -5,10 +5,10 @@ class Pokedex:
     
     def __init__(self):
         try:
-            with open("amount") as num:
+            with open("amount", encoding="utf8") as num:
                 self.numero = int(num.read())
         except FileNotFoundError:
-            with open("amount", "w") as num:
+            with open("amount", "w", encoding="utf8") as num:
                 num.write("0")
             self.numero = 0
         
@@ -22,14 +22,14 @@ class Pokedex:
         for i in range(int(indice), self.numero):
             rename("db/" + str(i+1), "db/" + str(i))
         self.numero -= 1
-        with open("amount", "w") as num:
+        with open("amount", "w", encoding="utf8") as num:
             num.write(str(self.numero))
         print("Pokemon Borrado de la Pokedex")
     
     def Borrar_Pokemon_Nombre(self, nombre):
         confirm = 0
         for i in range(1, self.numero+1):
-            with open("db/" + str(i)) as num:
+            with open("db/" + str(i), encoding="utf8") as num:
                 content = num.read()
                 if content.find(str(nombre).title()):
                     remove("db/" + str(i))
@@ -37,7 +37,7 @@ class Pokedex:
                         for i in range(1, self.numero):
                             rename("db/" + str(i+1), "db/" + str(i))
                     self.numero -= 1
-                    with open("amount", "w") as num:
+                    with open("amount", "w", encoding="utf8") as num:
                         num.write(str(self.numero))
                     confirm = 1
                     break
@@ -49,11 +49,11 @@ class Pokedex:
     
     def Escribir_Archivo_Pokemons(self, pokemon):
         
-        with open("db/" + str(self.numero+1), "w") as file_object:
+        with open("db/" + str(self.numero+1), "w", encoding="utf8") as file_object:
             file_object.write(pokemon.Escribir_Pokedex())
             self.numero += 1
                 
-        with open("amount", "w") as num:
+        with open("amount", "w", encoding="utf8") as num:
             num.write(str(self.numero))
                 
         print("Base de datos guardada")
@@ -61,7 +61,7 @@ class Pokedex:
     def Buscar_Pokemon_Pokedex(self, imagen):
         confirm = 0
         for i in range(1, self.numero+1):
-            with open("db/" + str(i)) as num:
+            with open("db/" + str(i), encoding="utf8") as num:
                 content = num.read()
                 if content.find(imagen) != -1:
                     confirm = 1
@@ -74,7 +74,7 @@ class Pokedex:
     def __str__(self):
         try:
             for poke in range(1, self.numero+1):            
-                with open("db/" + str(poke)) as file_text:
+                with open("db/" + str(poke), encoding="utf8") as file_text:
                     content = file_text.read()
                     print("No: " + str(poke) + " " +  content + "\n")
         except FileNotFoundError:

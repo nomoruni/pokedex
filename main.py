@@ -9,7 +9,7 @@ def main():
     pokedex = Pokedex()
     equipo = Equipo()
    
-    with open("images/pokemon") as poke:
+    with open("images/pokemon", encoding="utf8") as poke:
         content = poke.read()
         print(content)
     
@@ -67,7 +67,7 @@ def main():
                 
                 num3 = 0
                 while(num3 == 0):
-                    with open("images/" + str(img)) as im:
+                    with open("images/" + str(img), encoding="utf8") as im:
                         imagen = im.read()
                         print(imagen)
 
@@ -101,7 +101,7 @@ def main():
                                 for i in range(0, 2):
                                     print(".")
                                     time.sleep(1)
-                                with open("images/untrap") as im:
+                                with open("images/untrap", encoding="utf8") as im:
                                     untrap = im.read()
                                     print(untrap)
                                 print("\n¡El Pokémon se ha liberado de la pokeball!\n")
@@ -112,7 +112,7 @@ def main():
                                 for i in range(0, 2):
                                     print(".")
                                     time.sleep(1)
-                                with open("images/untrap") as im:
+                                with open("images/untrap", encoding="utf8") as im:
                                     untrap = im.read()
                                     print(untrap)
                                 print("\n¡El Pokémon se ha liberado de la pokeball!\n")
@@ -122,7 +122,7 @@ def main():
                                 for i in range(0, 2):
                                     print(".")
                                     time.sleep(1)
-                                with open("images/untrap") as im:
+                                with open("images/untrap", encoding="utf8") as im:
                                     untrap = im.read()
                                     print(untrap)
                                 print("\n¡El Pokémon se ha liberado de la pokeball!\n")
@@ -135,7 +135,7 @@ def main():
                                     time.sleep(1)
                                 print("¡¡Has atrapado al Pokémon!!\n")
                                 
-                                with open("images/trap") as im:
+                                with open("images/trap", encoding="utf8") as im:
                                     trap = im.read()
                                     print(trap)
 

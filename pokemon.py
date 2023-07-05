@@ -17,11 +17,11 @@ class Pokemon():
         self.descripcion = descripcion
         
     def __str__(self):
-        with open(self.imagen) as img:
+        with open(self.imagen, encoding="utf8") as img:
             content = img.read()
             return content + "\n Mote: " + self.nombre + "\n Tipo #1: " + self.tipo + "\n Tipo #2: " + self.tipo2 + "\n Naturaleza: " + self.naturaleza + "\n Descripción: " + self.descripcion + "\n"
     def Escribir_Pokedex(self):
-         with open(self.imagen) as img:
+         with open(self.imagen, encoding="utf8") as img:
             content = img.read()
             return "\n Nombre: " + content + "\n Tipo #1: " + self.tipo + "\n Tipo #2: " + self.tipo2 + "\n Descripción: " + self.descripcion + "\n"
     def Get_Nombre(self):
